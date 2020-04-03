@@ -11,9 +11,8 @@ class Battle < Sinatra::Base
 
 post '/names' do
   $player_1 = Player.new(params[:first_name]) #session[:first_name] = params[:first_name]
-  $player_2 = Player.new( params[:second_name])
-  
-  session[:second_name] = params[:second_name]
+  $player_2 = Player.new( params[:second_name]) # storing infomration from the server 
+
   redirect '/play'
 end 
 
@@ -25,11 +24,12 @@ get '/play' do
   erb :play
 end
 
-post '/attack' do
-  @first_name = $player_1.name
+get '/attack' do
+  @first_name = $player_1.name    #retrieving controller going to model and getting names from the model 
   @second_name = $player_2.name
   erb :attack
 end
+
 
   run! if app_file == $0
 
